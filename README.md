@@ -1,2 +1,3 @@
-# henriquepicanco.github.io
-O repositório do meu site pessoal (e onde meus projetos de portfólio serão hospedados).
+# Olá, eu sou o Henrique Picanço!
+
+Site em construção.
