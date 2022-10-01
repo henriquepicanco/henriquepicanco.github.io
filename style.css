@@ -1,0 +1,13 @@
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font: normal 400 18px/1.75 "Segoe UI";
+}
+
+.counter {
+	font-size: 30px;
+}
