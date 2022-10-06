@@ -1,23 +1,125 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html>
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Henrique Picanço - Desenvolvedor Front-End</title>
-	<link rel="stylesheet" href="style.css" />
+	<title>Henrique Picanço - Desenvolvedor web front-end</title>
+	<link rel="icon"
+		href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⭐</text></svg>">
+	<link rel="stylesheet" href="style.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+		rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+		rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+	<!-- <script src="three.r134.min.js"></script> -->
+	<!-- <script src="vanta.birds.min.js"></script> -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"
+		integrity="sha512-334uBDwY0iZ2TklV1OtDtBW9vp7jjP7SWRzT7Ehu1fdtPIjTpCwTSFb8HI/YBau9L1/kRBEOALrS229Kry4yFQ=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.birds.min.js"
+		integrity="sha512-iIWwQewCNqw+4f09oyZvCkBUNEuVfCSOtFzQW6dzvsm46yuToWTcL9uUEAyTnV0fG90jyCiiURE4yEgLclpoZA=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" defer></script> -->
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.waves.min.js"
+		integrity="sha512-gqHa0ICeg1WCe5rOOlxMjC1lXvXN3350qWwbePm2HV/pu2Qas+Nswuc+Eb62NZ/JOpMmOhZk4Chaak3twaBRRQ=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" defer></script> -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.globe.min.js"
+		integrity="sha512-cfeQlKIIaFDUyrmXLF3uv1DSprgNRSSptQF6lyPPmsnXhR2M8qtQ4B6pMQJE3BePiGHRefNCVO4u5/FUSzMkbQ=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.net.min.js"
+		integrity="sha512-lH/5/byfwH0bqySiiSINJJoEoWFEBGKgOwsnAlZZPviNJI1DDBVXjPHgEkM0fowfOp6NMBAN4ROAYjx+uEkEjQ=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+	<script src="script.js" defer></script>
 </head>
 <body>
-	<header class="site-header">
-		<h1 class="site-branding">Henrique Picanço</h1>
-		<p class="site-description">Desenvolvedor front-end (ou tentando ser)</p>
-	</header>
-	<main>
-		<p>Este site está em construção. Algum conteúdo será adicionado neste espaço futuramente.</p>
-	</main>
-	<footer class="site-footer">
-		<p class="copyright">© 2022 - Henrique Picanço</p>
-		<button class="funciona">Será que o script está funcionando?</button>
-	</footer>
-	<script src="script.js"></script>
+	<div class="site">
+		<header class="site-header">
+			<div class="site-branding">
+				<h1 class="site-title">
+					<a href="#">Henrique Picanço</a>
+				</h1>
+				<p class="site-description">
+					Jornalista e desenvolvedor web front-end
+				</p>
+				<div class="alert">SITE EM CONSTRUÇÃO</div>
+			</div>
+		</header>
+		<main class="site-content">
+			<div class="container">
+				<section class="about-me">
+					<h2 class="section-title">Sobre Mim</h2>
+					<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta delectus velit repellat. Vitae
+						quibusdam, quasi odit quidem eaque exercitationem tempora non deleniti error enim tenetur a
+						blanditiis? Nesciunt, nulla pariatur!</p>
+					<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit esse aut omnis vitae ipsa
+						blanditiis,
+						enim tempore reprehenderit temporibus minus ipsum deleniti explicabo amet nihil aliquam mollitia
+						tempora ducimus autem!</p>
+				</section>
+				<section class="skills">
+					<h2 class="section-title">Skills</h2>
+					<ul class="skills-list">
+						<li class="item item-html5">
+							<div class="name">HTML5</div>
+							<span class="percentage"></span>
+						</li>
+						<li class="item item-css3">
+							<div class="name">CSS3</div>
+							<span class="percentage"></span>
+						</li>
+						<li class="item item-javascript">
+							<div class="name">JavaScript</div>
+							<span class="percentage"></span>
+						</li>
+						<li class="item item-tailwind">
+							<div class="name">TailwindCSS</div>
+							<span class="percentage"></span>
+						</li>
+						<li class="item item-react">
+							<div class="name">React</div>
+							<span class="percentage"></span>
+						</li>
+						<li class="item item-nextjs">
+							<div class="name">NextJS</div>
+							<span class="percentage"></span>
+						</li>
+						<li class="item item-php">
+							<div class="name">PHP</div>
+							<span class="percentage"></span>
+						</li>
+						<li class="item item-wordpress">
+							<div class="name">WordPress</div>
+							<span class="percentage"></span>
+						</li>
+					</ul>
+				</section>
+				<section class="projects">
+					<h2 class="section-title">Projetos</h2>
+					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt quas doloremque, libero quia
+						saepe labore quidem praesentium sequi nisi debitis nihil. Rem exercitationem, deserunt nesciunt
+						earum necessitatibus veritatis nostrum. Obcaecati.</p>
+					<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. A neque nobis mollitia magnam odit nemo
+						ad illum tenetur expedita nisi, et quidem hic, maiores molestiae distinctio consequuntur
+						delectus repellat assumenda!</p>
+				</section>
+				<section class="contact">
+					<h2 class="section-title">Contato</h2>
+					<form>
+						<input type="text" name="name" placeholder="Seu Nome">
+						<input type="text" name="email" placeholder="seu-nome@exemplo.com">
+						<textarea name="content" id="content" cols="30" rows="10"
+							placeholder="Digite a sua mensagem."></textarea>
+						<input type="submit" value="Enviar">
+					</form>
+				</section>
+			</div>
+		</main>
+		<footer class="site-footer">
+			<div class="container">
+				<p>2022 © Henrique Picanço</p>
+			</div>
+		</footer>
+	</div>
 </body>
 </html>

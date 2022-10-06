@@ -1,13 +1,287 @@
+:root {
+    --font--main: "IBM Plex Sans", sans-serif;
+    --font--heading: "Lato", sans-serif;
+    --font--code: "IBM Plex Mono", monospace;
+
+    --color--background: #000;
+
+    --color--primary: #111;
+    --color--secondary: #333;
+    --color--tertiary: #555;
+    --color--quaternary: #777;
+    --color--red: #FF0000;
+    --color--green: #00FF00;
+    --color--white: #FFFFEE;
+
+    --color--percentage: #EFEFEF;
+    --color--html5: #F06529;
+    --color--css3: #2965F1;
+    --color--javascript: #F0DB4F;
+    --color--tailwind: #38BDF8;
+    --color--react: #61DAFB;
+    --color--nextjs: #000000;
+    --color--php: #7A86B8;
+    --color--wordpress: #117AC9;
+
+    --content--percentage--html5: 70%;
+    --content--percentage--css3: 80%;
+    --content--percentage--javascript: 50%;
+    --content--percentage--tailwind: 50%;
+    --content--percentage--react: 10%;
+    --content--percentage--nextjs: 10%;
+    --content--percentage--php: 25%;
+    --content--percentage--wordpress: 40%;
+
+    --content--max-width: 1280px;
+    --content--medium-width: 960px;
+    --content--min-width: 720px;
+
+    --gap: 1rem;
+}
+
 html,
 body {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-	font: normal 400 18px/1.75 "Segoe UI";
+    background-color: var(--color--background);
+    font: normal 400 16px/1.75 var(--font--main);
 }
 
-.counter {
-	font-size: 30px;
+@media (min-width: 600px) {
+    body {
+        font: normal 400 18px/1.75 var(--font--main);
+    }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+}
+
+/* Lists */
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Form */
+
+form {
+    padding: 1rem 0;
+    display: grid;
+    gap: 1rem;
+}
+
+[type="text"],
+[type="submit"],
+textarea {
+    padding: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+[type="submit"] {
+    color: white;
+    background-color: var(--color--primary);
+    font-weight: bold;
+    text-transform: uppercase;
+    border: 0;
+}
+
+/* Links */
+
+a {
+    color: var(--color--primary);
+    text-decoration: none;
+}
+
+a:hover,
+a:focus {
+    color: var(--color--secondary);
+}
+
+/* General */
+
+.container {
+    max-width: var(--content--min-width);
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.container-narrow {
+    max-width: var(--content--medium-width);
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.conteiner-small {
+    max-width: var(--content--min-width);
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.row {
+    display: flex;
+    gap: var(--gap);
+}
+
+.alert {
+    color: white;
+    background-color: var(--color--red);
+    width: 100%;
+    font: normal 600 125%/2 var(--font--heading);
+    box-shadow: 5px 5px white;
+}
+
+/* Header */
+
+.site-header {
+    padding: 2rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    /* background-image: linear-gradient(to bottom, var(--color--red), transparent); */
+    color: white;
+}
+
+@media (min-width: 600px) {
+    .site-header {
+        padding: 4rem 0;
+    }
+}
+
+@media (min-width: 980px) {
+    .site-header {
+        padding: 7.5rem 0;
+    }
+}
+
+.site-branding {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.site-title {
+    margin: 0;
+    letter-spacing: -0.05rem;
+    color: var(--color--white);
+    line-height: 1;
+}
+
+.site-title a {
+    color: white;
+}
+
+.site-description {
+    margin: 0;
+}
+
+/* Sections */
+
+.site-content section {
+    margin-bottom: 2rem;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+@media (min-width: 600px) {
+    .site-content section {
+        margin-bottom: 4rem;
+        padding: 2rem;
+    }
+}
+
+.skills-list {
+    display: grid;
+    grid-template-columns: 1;
+    gap: 1rem;
+    margin-top: 1.25rem;
+}
+
+@media (min-width: 600px) {
+    .skills-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+}
+
+.skills-list .item {
+    display: grid;
+    gap: 0.5rem;
+    align-items: center;
+    font-weight: 600;
+}
+
+.skills-list .item .percentage {
+    width: 100%;
+    height: 1rem;
+}
+
+.item-html5 .percentage {
+    color: white;
+    background-image: linear-gradient(to right, var(--color--html5) var(--content--percentage--html5), var(--color--percentage) 30%);
+}
+
+.item-css3 .percentage {
+    color: white;
+    background-image: linear-gradient(to right, var(--color--css3) var(--content--percentage--css3), var(--color--percentage) 0%);
+}
+
+.item-javascript .percentage {
+    color: black;
+    background-image: linear-gradient(to right, var(--color--javascript) var(--content--percentage--javascript), var(--color--percentage) 0%);
+}
+
+.item-tailwind .percentage {
+    color: black;
+    background-image: linear-gradient(to right, var(--color--tailwind) var(--content--percentage--tailwind), var(--color--percentage) 0%);
+}
+
+.item-react .percentage {
+    color: black;
+    background-image: linear-gradient(to right, var(--color--react) var(--content--percentage--react), var(--color--percentage) 0%);
+}
+
+.item-nextjs .percentage {
+    color: white;
+    background-image: linear-gradient(to right, var(--color--nextjs) var(--content--percentage--nextjs), var(--color--percentage) 0%);
+}
+
+.item-php .percentage {
+    color: black;
+    background-image: linear-gradient(to right, var(--color--php) var(--content--percentage--php), var(--color--percentage) 0%);
+}
+
+.item-wordpress .percentage {
+    color: white;
+    background-image: linear-gradient(to right, var(--color--wordpress) var(--content--percentage--wordpress), var(--color--percentage) 0%);
+}
+
+/* Footer */
+
+.site-footer {
+    background-color: white;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.site-footer p:last-child {
+    margin: 0;
 }
