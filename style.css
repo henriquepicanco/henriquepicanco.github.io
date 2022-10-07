@@ -17,20 +17,12 @@
     --color--html5: #F06529;
     --color--css3: #2965F1;
     --color--javascript: #F0DB4F;
-    --color--tailwind: #38BDF8;
-    --color--react: #61DAFB;
-    --color--nextjs: #000000;
-    --color--php: #7A86B8;
-    --color--wordpress: #117AC9;
+    --color--sass: #CF649A;
 
     --content--percentage--html5: 70%;
     --content--percentage--css3: 80%;
     --content--percentage--javascript: 50%;
-    --content--percentage--tailwind: 50%;
-    --content--percentage--react: 10%;
-    --content--percentage--nextjs: 10%;
-    --content--percentage--php: 25%;
-    --content--percentage--wordpress: 40%;
+    --content--percentage--sass: 1%;
 
     --content--max-width: 1280px;
     --content--medium-width: 960px;
@@ -66,6 +58,7 @@ h3,
 h4,
 h5,
 h6 {
+    font-family: var(--font--code);
     margin: 0;
 }
 
@@ -142,7 +135,7 @@ a:focus {
     color: white;
     background-color: var(--color--red);
     width: 100%;
-    font: normal 600 125%/2 var(--font--heading);
+    font: normal 600 125%/2 var(--font--code);
     box-shadow: 5px 5px white;
 }
 
@@ -154,7 +147,6 @@ a:focus {
     align-items: center;
     justify-content: center;
     text-align: center;
-    /* background-image: linear-gradient(to bottom, var(--color--red), transparent); */
     color: white;
 }
 
@@ -199,6 +191,8 @@ a:focus {
     background-color: white;
     padding: 1rem;
     border-radius: 5px;
+    -webkit-animation: slide-to-top 1s ease-in;
+    animation: slide-to-top 1s ease-in;
 }
 
 @media (min-width: 600px) {
@@ -208,7 +202,12 @@ a:focus {
     }
 }
 
-.skills-list {
+.section-badge {
+    font-size: 0.75rem;
+    margin-left: 0.325rem;
+}
+
+.section-skills-list {
     display: grid;
     grid-template-columns: 1;
     gap: 1rem;
@@ -216,62 +215,102 @@ a:focus {
 }
 
 @media (min-width: 600px) {
-    .skills-list {
+    .section-skills-list {
         grid-template-columns: repeat(2, 1fr);
         gap: 2rem;
     }
 }
 
-.skills-list .item {
+.section-skills-list .section-skills-item {
     display: grid;
     gap: 0.5rem;
     align-items: center;
     font-weight: 600;
 }
 
-.skills-list .item .percentage {
+.section-skills-list .name {
+    display: flex;
+}
+
+.percentage {
+    position: relative;
     width: 100%;
     height: 1rem;
+    background-color: var(--color--percentage);
+    display: flex;
+    align-items: flex-start;
 }
 
-.item-html5 .percentage {
-    color: white;
-    background-image: linear-gradient(to right, var(--color--html5) var(--content--percentage--html5), var(--color--percentage) 30%);
+.percentage:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    content: "";
+    height: 100%;
+    animation: percentage 2s;
+    transform-origin: 0 100%;
 }
 
-.item-css3 .percentage {
-    color: white;
-    background-image: linear-gradient(to right, var(--color--css3) var(--content--percentage--css3), var(--color--percentage) 0%);
+.section-skills-item-html5 .percentage:before {
+    width: var(--content--percentage--html5);
+    background-color: var(--color--html5);
 }
 
-.item-javascript .percentage {
+.section-skills-item-css3 .percentage:before {
+    width: var(--content--percentage--css3);
+    background-color: var(--color--css3);
+}
+
+.section-skills-item-javascript .percentage:before {
+    width: var(--content--percentage--javascript);
+    background-color: var(--color--javascript);
+}
+
+.section-skills-item-sass .percentage:before {
+    width: var(--content--percentage--sass);
+    background-color: var(--color--sass);
+}
+
+.section-notes {
+    margin: 3rem 0 0;
+}
+
+.section-notes-title {
+    font-size: 95%;
+    margin-bottom: 1rem;
+}
+
+.section-notes-list {
+    list-style-type: disc;
+    padding: 0 0 0 1.5rem;
+    font-size: 80%;
+}
+
+.section-projects-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+@media (min-width: 600px) {
+    .section-projects-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.section-projects-item {
     color: black;
-    background-image: linear-gradient(to right, var(--color--javascript) var(--content--percentage--javascript), var(--color--percentage) 0%);
-}
-
-.item-tailwind .percentage {
-    color: black;
-    background-image: linear-gradient(to right, var(--color--tailwind) var(--content--percentage--tailwind), var(--color--percentage) 0%);
-}
-
-.item-react .percentage {
-    color: black;
-    background-image: linear-gradient(to right, var(--color--react) var(--content--percentage--react), var(--color--percentage) 0%);
-}
-
-.item-nextjs .percentage {
-    color: white;
-    background-image: linear-gradient(to right, var(--color--nextjs) var(--content--percentage--nextjs), var(--color--percentage) 0%);
-}
-
-.item-php .percentage {
-    color: black;
-    background-image: linear-gradient(to right, var(--color--php) var(--content--percentage--php), var(--color--percentage) 0%);
-}
-
-.item-wordpress .percentage {
-    color: white;
-    background-image: linear-gradient(to right, var(--color--wordpress) var(--content--percentage--wordpress), var(--color--percentage) 0%);
+    border: 0.125rem solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    aspect-ratio: 21/9;
+    text-transform: uppercase;
 }
 
 /* Footer */
@@ -284,4 +323,40 @@ a:focus {
 
 .site-footer p:last-child {
     margin: 0;
+}
+
+/* Animations */
+
+@keyframes opacity {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes slide-to-top {
+    0% {
+        opacity: 0;
+        -webkit-transform: translate(0, 50px);
+        transform: translate(0, 50px);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: translate(0, 0);
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes percentage {
+    from {
+        transform: scaleX(0);
+    }
+
+    to {
+        transform: scaleX(100%);
+    }
 }

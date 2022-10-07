@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,22 +8,9 @@
 		href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⭐</text></svg>">
 	<link rel="stylesheet" href="style.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-		rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-		rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap" rel="stylesheet">
-	<!-- <script src="three.r134.min.js"></script> -->
-	<!-- <script src="vanta.birds.min.js"></script> -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"
 		integrity="sha512-334uBDwY0iZ2TklV1OtDtBW9vp7jjP7SWRzT7Ehu1fdtPIjTpCwTSFb8HI/YBau9L1/kRBEOALrS229Kry4yFQ=="
 		crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
-	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.birds.min.js"
-		integrity="sha512-iIWwQewCNqw+4f09oyZvCkBUNEuVfCSOtFzQW6dzvsm46yuToWTcL9uUEAyTnV0fG90jyCiiURE4yEgLclpoZA=="
-		crossorigin="anonymous" referrerpolicy="no-referrer" defer></script> -->
-	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.waves.min.js"
-		integrity="sha512-gqHa0ICeg1WCe5rOOlxMjC1lXvXN3350qWwbePm2HV/pu2Qas+Nswuc+Eb62NZ/JOpMmOhZk4Chaak3twaBRRQ=="
-		crossorigin="anonymous" referrerpolicy="no-referrer" defer></script> -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.globe.min.js"
 		integrity="sha512-cfeQlKIIaFDUyrmXLF3uv1DSprgNRSSptQF6lyPPmsnXhR2M8qtQ4B6pMQJE3BePiGHRefNCVO4u5/FUSzMkbQ=="
 		crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
@@ -35,82 +22,113 @@
 <body>
 	<div class="site">
 		<header class="site-header">
-			<div class="site-branding">
-				<h1 class="site-title">
-					<a href="#">Henrique Picanço</a>
-				</h1>
-				<p class="site-description">
-					Jornalista e desenvolvedor web front-end
-				</p>
-				<div class="alert">SITE EM CONSTRUÇÃO</div>
+			<div class="container">
+				<div class="site-branding">
+					<h1 class="site-title">
+						<a href="#">
+							Henrique Picanço
+						</a>
+					</h1>
+					<p class="site-description">
+						Jornalista e desenvolvedor web front-end
+					</p>
+				</div>
 			</div>
 		</header>
 		<main class="site-content">
 			<div class="container">
-				<section class="about-me">
+				<section class="section-about-me">
 					<h2 class="section-title">Sobre Mim</h2>
-					<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta delectus velit repellat. Vitae
-						quibusdam, quasi odit quidem eaque exercitationem tempora non deleniti error enim tenetur a
-						blanditiis? Nesciunt, nulla pariatur!</p>
-					<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit esse aut omnis vitae ipsa
-						blanditiis,
-						enim tempore reprehenderit temporibus minus ipsum deleniti explicabo amet nihil aliquam mollitia
-						tempora ducimus autem!</p>
+					<p>
+						Formado em Jornalismo pelo <strong>Centro Universitário Carioca - UNICARIOCA</strong>
+						(2016/2022), desde cedo tinha contato com o mundo da tecnologia, já que escrevia sobre o tema em
+						<em>blogs</em> que tive ao longo da adolescência.
+					</p>
+					<p>
+						Por conta desses <em>blogs</em>, também fui adquirindo um amor pelo
+						<strong><em>front-end</em></strong> já que também me metia a fazer meus temas para os blogs.
+						Neste processo, acabei tendo contato com <strong>HTML5</strong>, <strong>CSS3</strong>,
+						<strong>PHP</strong> (por conta do WordPress), além de alguns geradores de site estáticos, como
+						<strong>HUGO</strong>, <strong>GatsbyJS</strong> e <strong>NextJS</strong>, mesmo que para isso
+						não tenha me preocupado em estudar JavaScript (na época).
+					</p>
+					<p>
+						Ao terminar a faculdade, decidi voltar minhas atenções ao mundo da programação front-end de
+						fato, agora estudando para não apenas ser uma espécie de hobby, mas também meio de vida a partir
+						de agora.
+					</p>
 				</section>
-				<section class="skills">
+				<section class="section-skills">
 					<h2 class="section-title">Skills</h2>
-					<ul class="skills-list">
-						<li class="item item-html5">
-							<div class="name">HTML5</div>
+					<p>Abaixo, você pode ver todas as linguagens com quais uso ou já usei um dia.</p>
+					<ul class="section-skills-list">
+						<li class="section-skills-item section-skills-item-html5">
+							<span class="name">HTML5</span>
 							<span class="percentage"></span>
 						</li>
-						<li class="item item-css3">
-							<div class="name">CSS3</div>
+						<li class="section-skills-item section-skills-item-css3">
+							<span class="name">CSS3</span>
 							<span class="percentage"></span>
 						</li>
-						<li class="item item-javascript">
-							<div class="name">JavaScript</div>
+						<li class="section-skills-item section-skills-item-javascript">
+							<span class="name">JavaScript <strong class="section-badge">(*)</strong></span>
 							<span class="percentage"></span>
 						</li>
-						<li class="item item-tailwind">
-							<div class="name">TailwindCSS</div>
-							<span class="percentage"></span>
-						</li>
-						<li class="item item-react">
-							<div class="name">React</div>
-							<span class="percentage"></span>
-						</li>
-						<li class="item item-nextjs">
-							<div class="name">NextJS</div>
-							<span class="percentage"></span>
-						</li>
-						<li class="item item-php">
-							<div class="name">PHP</div>
-							<span class="percentage"></span>
-						</li>
-						<li class="item item-wordpress">
-							<div class="name">WordPress</div>
+						<li class="section-skills-item section-skills-item-sass">
+							<span class="name">SASS <strong class="section-badge">(**)</strong></span>
 							<span class="percentage"></span>
 						</li>
 					</ul>
+					<div class="section-notes">
+						<h3 class="section-notes-title">
+							<strong>Descrição:</strong>
+						</h3>
+						<ul class="section-notes-list">
+							<li class="section-notes-item">
+								<strong>(*)</strong> - linguagens e/ou <em>frameworks</em> que
+								estou estudando;
+							</li>
+							<li class="section-notes-item">
+								<strong>(**)</strong> - linguagens e/ou <em>frameworks</em> que
+								estudarei em breve;
+							</li>
+						</ul>
+					</div>
 				</section>
-				<section class="projects">
+				<section class="section-projects">
 					<h2 class="section-title">Projetos</h2>
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt quas doloremque, libero quia
-						saepe labore quidem praesentium sequi nisi debitis nihil. Rem exercitationem, deserunt nesciunt
-						earum necessitatibus veritatis nostrum. Obcaecati.</p>
-					<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. A neque nobis mollitia magnam odit nemo
-						ad illum tenetur expedita nisi, et quidem hic, maiores molestiae distinctio consequuntur
-						delectus repellat assumenda!</p>
+					<ul class="section-projects-list">
+						<li class="section-projects-item">
+							<span class="section-projects-content">
+								<strong>Em breve</strong>
+							</span>
+						</li>
+						<li class="section-projects-item">
+							<span class="section-projects-content">
+								<strong>Em breve</strong>
+							</span>
+						</li>
+						<li class="section-projects-item">
+							<span class="section-projects-content">
+								<strong>Em breve</strong>
+							</span>
+						</li>
+						<li class="section-projects-item">
+							<span class="section-projects-content">
+								<strong>Em breve</strong>
+							</span>
+						</li>
+					</ul>
 				</section>
-				<section class="contact">
+				<section class="section-contact">
 					<h2 class="section-title">Contato</h2>
-					<form>
+					<form action="https://formspree.io/f/xpznrekj" method="post">
 						<input type="text" name="name" placeholder="Seu Nome">
 						<input type="text" name="email" placeholder="seu-nome@exemplo.com">
-						<textarea name="content" id="content" cols="30" rows="10"
+						<input type="text" name="subject" placeholder="Assunto da mensagem">
+						<textarea name="message" id="content" cols="30" rows="10"
 							placeholder="Digite a sua mensagem."></textarea>
-						<input type="submit" value="Enviar">
+						<button type="submit">Enviar</button>
 					</form>
 				</section>
 			</div>
@@ -121,5 +139,9 @@
 			</div>
 		</footer>
 	</div>
+	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+		rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+		rel="stylesheet">
 </body>
 </html>
