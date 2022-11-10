@@ -1,147 +1,56 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Henrique Picanço - Desenvolvedor web front-end</title>
-	<link rel="icon"
-		href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⭐</text></svg>">
-	<link rel="stylesheet" href="style.css">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"
-		integrity="sha512-334uBDwY0iZ2TklV1OtDtBW9vp7jjP7SWRzT7Ehu1fdtPIjTpCwTSFb8HI/YBau9L1/kRBEOALrS229Kry4yFQ=="
-		crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.globe.min.js"
-		integrity="sha512-cfeQlKIIaFDUyrmXLF3uv1DSprgNRSSptQF6lyPPmsnXhR2M8qtQ4B6pMQJE3BePiGHRefNCVO4u5/FUSzMkbQ=="
-		crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.net.min.js"
-		integrity="sha512-lH/5/byfwH0bqySiiSINJJoEoWFEBGKgOwsnAlZZPviNJI1DDBVXjPHgEkM0fowfOp6NMBAN4ROAYjx+uEkEjQ=="
-		crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
-	<script src="script.js" defer></script>
-</head>
-<body>
-	<div class="site">
-		<header class="site-header">
-			<div class="container">
-				<div class="site-branding">
-					<h1 class="site-title">
-						<a href="#">
-							Henrique Picanço
-						</a>
-					</h1>
-					<p class="site-description">
-						Jornalista e desenvolvedor web front-end
-					</p>
-				</div>
-			</div>
-		</header>
-		<main class="site-content">
-			<div class="container">
-				<section class="section-about-me">
-					<h2 class="section-title">Sobre Mim</h2>
-					<p>
-						Formado em Jornalismo pelo <strong>Centro Universitário Carioca - UNICARIOCA</strong>
-						(2016/2022), desde cedo tinha contato com o mundo da tecnologia, já que escrevia sobre o tema em
-						<em>blogs</em> que tive ao longo da adolescência.
-					</p>
-					<p>
-						Por conta desses <em>blogs</em>, também fui adquirindo um amor pelo
-						<strong><em>front-end</em></strong> já que também me metia a fazer meus temas para os blogs.
-						Neste processo, acabei tendo contato com <strong>HTML5</strong>, <strong>CSS3</strong>,
-						<strong>PHP</strong> (por conta do WordPress), além de alguns geradores de site estáticos, como
-						<strong>HUGO</strong>, <strong>GatsbyJS</strong> e <strong>NextJS</strong>, mesmo que para isso
-						não tenha me preocupado em estudar JavaScript (na época).
-					</p>
-					<p>
-						Ao terminar a faculdade, decidi voltar minhas atenções ao mundo da programação front-end de
-						fato, agora estudando para não apenas ser uma espécie de hobby, mas também meio de vida a partir
-						de agora.
-					</p>
-				</section>
-				<section class="section-skills">
-					<h2 class="section-title">Skills</h2>
-					<p>Abaixo, você pode ver todas as linguagens com quais uso ou já usei um dia.</p>
-					<ul class="section-skills-list">
-						<li class="section-skills-item section-skills-item-html5">
-							<span class="name">HTML5</span>
-							<span class="percentage"></span>
-						</li>
-						<li class="section-skills-item section-skills-item-css3">
-							<span class="name">CSS3</span>
-							<span class="percentage"></span>
-						</li>
-						<li class="section-skills-item section-skills-item-javascript">
-							<span class="name">JavaScript <strong class="section-badge">(*)</strong></span>
-							<span class="percentage"></span>
-						</li>
-						<li class="section-skills-item section-skills-item-sass">
-							<span class="name">SASS <strong class="section-badge">(**)</strong></span>
-							<span class="percentage"></span>
-						</li>
-					</ul>
-					<div class="section-notes">
-						<h3 class="section-notes-title">
-							<strong>Descrição:</strong>
-						</h3>
-						<ul class="section-notes-list">
-							<li class="section-notes-item">
-								<strong>(*)</strong> - linguagens e/ou <em>frameworks</em> que
-								estou estudando;
-							</li>
-							<li class="section-notes-item">
-								<strong>(**)</strong> - linguagens e/ou <em>frameworks</em> que
-								estudarei em breve;
-							</li>
-						</ul>
-					</div>
-				</section>
-				<section class="section-projects">
-					<h2 class="section-title">Projetos</h2>
-					<ul class="section-projects-list">
-						<li class="section-projects-item">
-							<span class="section-projects-content">
-								<strong>Em breve</strong>
-							</span>
-						</li>
-						<li class="section-projects-item">
-							<span class="section-projects-content">
-								<strong>Em breve</strong>
-							</span>
-						</li>
-						<li class="section-projects-item">
-							<span class="section-projects-content">
-								<strong>Em breve</strong>
-							</span>
-						</li>
-						<li class="section-projects-item">
-							<span class="section-projects-content">
-								<strong>Em breve</strong>
-							</span>
-						</li>
-					</ul>
-				</section>
-				<section class="section-contact">
-					<h2 class="section-title">Contato</h2>
-					<form action="https://formspree.io/f/xpznrekj" method="post">
-						<input type="text" name="name" placeholder="Seu Nome">
-						<input type="text" name="email" placeholder="seu-nome@exemplo.com">
-						<input type="text" name="subject" placeholder="Assunto da mensagem">
-						<textarea name="message" id="content" cols="30" rows="10"
-							placeholder="Digite a sua mensagem."></textarea>
-						<button type="submit">Enviar</button>
-					</form>
-				</section>
-			</div>
-		</main>
-		<footer class="site-footer">
-			<div class="container">
-				<p>2022 © Henrique Picanço</p>
-			</div>
-		</footer>
-	</div>
-	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-		rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-		rel="stylesheet">
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Henrique Picanço</title>
+        <meta
+            name="description"
+            content="Repositório oficial de Henrique Picanço" />
+        <link
+            rel="shortcut icon"
+            href="assets/images/favicon.png"
+            type="image/x-icon" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+            rel="stylesheet" />
+        <link rel="stylesheet" href="assets/css/style.css" />
+    </head>
+    <body>
+        <div class="site">
+            <header class="site-header">
+                <h1 class="site-title">Henrique Picanço</h1>
+                <p>
+                    Encontre informações sobre meus projetos e caminhos úteis
+                    para os meus trabalhos usando os links abaixo.
+                </p>
+                <ul class="util-links">
+                    <li class="list-item">
+                        <button disabled="disabled">
+                            <!-- <a
+                                href="https://henriquepicanco.com"
+                                target="_blank"
+                                rel="author"> -->
+                            Site Oficial (em breve)
+                            <!-- </a> -->
+                        </button>
+                    </li>
+                    <li class="list-item">
+                        <button type="button">
+                            <a
+                                class="link"
+                                href="https://links.henriquepicanco.com"
+                                target="_blank"
+                                rel="author">
+                                Links úteis
+                            </a>
+                        </button>
+                    </li>
+                </ul>
+            </header>
+        </div>
+    </body>
 </html>

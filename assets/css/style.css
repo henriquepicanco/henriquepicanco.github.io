@@ -1,0 +1,96 @@
+:root {
+    --font--main: "Inter", sans-serif;
+
+    --font--size: 16px;
+    --line--height: 1.75;
+
+    --color--primary: rgb(128, 0, 255);
+    --color--secondary: rgb(255, 0, 128);
+    --color--tertiary: rgb(0, 255, 128);
+
+    --color--white: rgb(255, 255, 255);
+    --color--black: rgb(30, 30, 30);
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font: normal 400 var(--font--size) / var(--line--height) var(--font--main);
+}
+
+button {
+    font-weight: bold;
+    color: var(--color--white);
+    background-color: var(--color--primary);
+    border: 0;
+    padding: 0;
+    font-size: 1rem;
+    box-shadow: 0;
+    transition: box-shadow 0.25s, background-color 0.25s;
+}
+
+button:disabled {
+    background-color: gray;
+    padding: 1rem 2rem;
+}
+
+button:hover:not(:disabled),
+button:focus:not(:disabled) {
+    background-color: var(--color--secondary);
+    box-shadow: 5px 5px 0px 1px var(--color--primary);
+}
+
+button > a {
+    display: inline-block;
+    padding: 1rem 2rem;
+}
+
+a {
+    color: var(--color--white);
+    text-decoration: none;
+}
+
+a:hover,
+a:focus {
+    outline: none;
+}
+
+p {
+    margin: 0;
+}
+
+.site {
+    display: grid;
+    place-items: center;
+    text-align: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.site-header {
+    width: 92%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.site-title {
+    margin: 0;
+    font-size: 2.75rem;
+}
+
+.util-links {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
