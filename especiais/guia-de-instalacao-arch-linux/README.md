@@ -140,15 +140,15 @@ Em seguida, montamos a partição BTRFS para criar nossos subvolumes.
 Com os subvolumes criados, podemos prosseguir para a montagem dos subvolumes e da partição de boot. Note que a partir do segundo comando `mount`, a flag `-m` é adicionada. Esta *flag* garante que a pasta de destino (no caso `/mnt/home`) seja criada no momento em que o subvolume (ou partição) é montado.
 
 ```text
-# mount /dev/mapper/cryptroot -o subvol=@ /mnt
-# mount /dev/mapper/cryptroot -m -o subvol=@home /mnt/home
-# mount /dev/mapper/cryptroot -m -o subvol=@pkg /mnt/var/cache/pacman/pkg
-# mount /dev/mapper/cryptroot -m -o subvol=@flatpak /mnt/var/lib/flatpak
-# mount /dev/mapper/cryptroot -m -o subvol=@machines /mnt/var/lib/machines
-# mount /dev/mapper/cryptroot -m -o subvol=@portables /mnt/var/lib/portables
-# mount /dev/mapper/cryptroot -m -o subvol=@log /mnt/var/log
-# mount /dev/mapper/cryptroot -m -o subvol=@.snapshots /mnt/.snapshots
-# mount /dev/sdX1 -m -o dmask=0077,umask=0077 /mnt/efi
+# mount /dev/mapper/cryptroot -o rw,relatime,compress=zstd:7,space_cache=v2,subvol=@ /mnt
+# mount /dev/mapper/cryptroot -m -o rw,relatime,compress=zstd:7,space_cache=v2,subvol=@home /mnt/home
+# mount /dev/mapper/cryptroot -m -o rw,relatime,nodatacow,space_cache=v2,subvol=@pkg /mnt/var/cache/pacman/pkg
+# mount /dev/mapper/cryptroot -m -o rw,relatime,nodatacow,space_cache=v2,subvol=@flatpak /mnt/var/lib/flatpak
+# mount /dev/mapper/cryptroot -m -o rw,relatime,compress=zstd:7,space_cache=v2,subvol=@machines /mnt/var/lib/machines
+# mount /dev/mapper/cryptroot -m -o rw,relatime,compress=zstd:7,space_cache=v2,subvol=@portables /mnt/var/lib/portables
+# mount /dev/mapper/cryptroot -m -o rw,relatime,nodatacow,space_cache=v2,subvol=@log /mnt/var/log
+# mount /dev/mapper/cryptroot -m -o rw,relatime,compress=zstd:7,space_cache=v2,subvol=@.snapshots /mnt/.snapshots
+# mount /dev/sdX1 -m -o rw,relatime,umask=0077,utf8,errors=remount-ro /mnt/efi
 ```
 
 ### Instalação
@@ -224,6 +224,25 @@ Neste comando, usarei expansão por chaves para evitar repetições de nomes (`l
 
 ```text
 # genfstab -U /mnt >> /mnt/etc/fstab
+```
+
+Depois, podemos editar o `/etc/fstab`. Isto não é necessário, mas a vida é feita de teimosias. Gosto de editar este arquivo para ficar semelhante ao conteúdo abaixo, apenas por estética.
+
+```text
+# vim /mnt/etc/fstab
+--------------------
+# FILESYSTEM                               PATH                   TYPE   OPTIONS                                                        DUMP  PASS
+# /dev/mapper/cryptroot
+UUID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX  /                      btrfs  rw,relatime,compress=zstd:7,space_cache=v2,subvol=@            0     0
+UUID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX  /home                  btrfs  rw,relatime,compress=zstd:7,space_cache=v2,subvol=@home        0     0
+UUID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX  /var/cache/pacman/pkg  btrfs  rw,relatime,nodatacow,space_cache=v2,subvol=@pkg               0     0
+UUID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX  /var/lib/flatpak       btrfs  rw,relatime,nodatacow,space_cache=v2,subvol=@flatpak           0     0
+UUID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX  /var/lib/machines      btrfs  rw,relatime,compress=zstd:7,space_cache=v2,subvol=@machines    0     0
+UUID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX  /var/lib/portables     btrfs  rw,relatime,compress=zstd:7,space_cache=v2,subvol=@portables   0     0
+UUID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX  /var/log               btrfs  rw,relatime,nodatacow,space_cache=v2,subvol=@log               0     0
+UUID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX  /.snapshots            btrfs  rw,relatime,compress=zstd:7,space_cache=v2,subvol=@.snapshots  0     0
+# /dev/sdX1
+UUID=XXXX-XXXX                             /efi                   vfat   rw,relatime,umask=0077,utf8,errors=remount-ro                  0     2
 ```
 
 #### Chroot
@@ -492,7 +511,7 @@ $ sudo pacman -S stow
 
 #### NVIDIA
 
-Para instalar o drive da NVIDIA, primeiro adicionaremos um parâmetro de kernel que será adicionado a um arquivo UKI. Este arquivo será gerado automaticamente ao instalarmos o driver.
+Para instalar o drive da NVIDIA, primeiro adicionaremos um parâmetro de kernel ao `/etc/cmdline.d`. Ele será adicionado a uma nova imagem unificada de kernel, que será gerada automaticamente ao instalarmos o driver.
 
 ```text
 $ echo "nvidia_drm.modeset=1" | sudo tee /etc/cmdline.d/50-nvidia.conf
@@ -510,9 +529,43 @@ $ sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/fl
 
 ### Ambiente, fontes, áudio e programas
 
+#### Fontes
+
+Instalaremos algumas fontes para termos uma ampla gama de caracters visíveis, como emojis.
+
 ```text
-$ sudo pacman -S greetd{,-tuigreet} {gnu-free,noto}-fonts ttf-{bitstream-vera,croscore,dejavu,droid,ibm-plex,input{,-nerd},liberation,roboto} pipewire-{alsa,jack,pulse} wireplumber niri alacritty rofi-wayland waybar mako bluez{,-utils}
-$ sudo flatpak install org.mozilla.{firefox,Thunderbird} org.videolan.VLC
-$ sudo systemctl enable greetd.service bluetooth.service
+$ sudo pacman -S {gnu-free,noto}-fonts ttf-{bitstream-vera,croscore,dejavu,droid,ibm-plex,input{,-nerd},liberation,roboto}
+```
+
+#### Áudio
+
+O Pipewire e o WirePlumber serão instalados e, depois, ativaremos os serviços respecitovs a nível de usuário (não podem ser ativados a nível de sistema).
+
+```text
+$ sudo pacman -S pipewire-{alsa,jack,pulse} wireplumber
 $ systemctl enable --user {pipewire{,-pulse},wireplumber}.service
+```
+
+#### Bluetooth
+
+Instalaremos os utilitários de bluetooth e ativar o serviço do systemd.
+
+```text
+$ sudo pacman -S bluez{,-utils}
+$ sudo systemctl enable bluetooth.service
+```
+
+#### Ambiente gráfico
+
+```text
+$ sudo pacman -S greetd{,-tuigreet} niri alacritty rofi-wayland waybar mako nautilus
+$ sudo systemctl enable greetd.service
+```
+
+#### Programas
+
+Nesta lista, o Firefox, Thunderbird, VLC, Zed, Visual Studio COde, Flatseal, GNOME Text Editor, 
+
+```text
+$ sudo flatpak install org.mozilla.{firefox,Thunderbird} org.videolan.VLC dev.zed.Zed com.visualstudio.Code com.github.tchx84.Flatseal org.gnome.TextEditor com.valvesoftware.Steam org.libreoffice.LibreOffice org.nickvision.tubeconverter
 ```
