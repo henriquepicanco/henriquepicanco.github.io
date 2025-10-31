@@ -190,7 +190,7 @@ Include = /etc/pacman.d/mirrorlist
 Por padrão, o `reflector` criará um mirrorlist genérico, porém efetivo para um sistema rápido. Prefiro, entretanto, editar o arquivo para que dê preferência a espelhos do Arch Linux no Brasil, nos Estados Unidos e espelhos internacionais.
 
 ```text
-# nvim /etc/pacman.d/mirrorlist
+# vim /etc/pacman.d/mirrorlist
 -------------------------------
 Server = https://archlinux.c3sl.ufpr.br/$repo/os/$arch
 Server = https://mirror.ufscar.br/archlinux/$repo/os/$arch
