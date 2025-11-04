@@ -1,5 +1,5 @@
 # Olá, eu sou o Henrique Picanço!
 
-Esta página foi feita apenas para deixar algo na tela, quando se acessa diretamente o link [henriquepicanco.github.io](https://henriquepicanco.github.io). Meu portfólio ainda está em construção, e será publicado em [henriquepicanco.com](https://henriquepicanco.com/). Você também pode encontrar links úteis para minhas redes sociais em [links.henriquepicanco.com](https://links.henriquepicanco.com/)
+Este é o repositório do meu site GitHub Pages.
 
-Contato: contato@henriquepicanco.com
+Não tem nada de muito importante aqui, apenas um site para publicar rapidamente informações relevantes que preciso ter acesso publicamente na internet.
