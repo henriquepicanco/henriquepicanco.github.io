@@ -355,12 +355,24 @@ Podemos configurar o `sudo` do sistema com uma mudança não destrutiva, criando
 # echo "%wheel ALL=(ALL:ALL) ALL" | EDITOR=tee visudo -f /etc/sudoers.d/00-wheel
 ```
 
-#### Senha do root
+#### Usuários e root
 
-Criaremos agora uma senha segura para o root. Esta senha deve ser longa, recomendado ter pelo menos 8 caracteres que misture letras em caixas alta e baixa, símbolos e números.
+Primeiro, criaremos o usuário que terá permissões de superusuário através de `sudo` no nosso sistema.
 
 ```text
-# passwd
+# useradd -m -c "Nome completo" -G wheel -s /bin/bash usuario
+```
+
+Criaremos agora uma senha segura para este usuário. Esta senha deve ser longa, recomendado ter pelo menos 8 caracteres que misture letras em caixas alta e baixa, símbolos e números.
+
+```text
+# passwd usuario
+```
+
+Por último, iremos **bloquear o acesso de root**. Esta é uma medida de segurança popular. Vale lembrar que anteriormente configuramos o `sudo` e na criação do nosso usuários, o colocamos no grupo `wheel`, que terá permissão de superusuário para tarefas e funções típicas de root.
+
+```text
+# passwd -l root
 ```
 
 #### Serviços
