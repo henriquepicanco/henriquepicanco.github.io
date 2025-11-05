@@ -192,17 +192,30 @@ Por padrão, o `reflector` criará um mirrorlist genérico, porém efetivo para 
 ```text
 # vim /etc/pacman.d/mirrorlist
 -------------------------------
+# UFPR
 Server = https://archlinux.c3sl.ufpr.br/$repo/os/$arch
+
+# UFSCAR
 Server = https://mirror.ufscar.br/archlinux/$repo/os/$arch
+
+# UNICAMP
 Server = https://mirrors.ic.unicamp.br/archlinux/$repo/os/$arch
+
+# Kernel.org
 Server = https://mirrors.edge.kernel.org/archlinux/$repo/os/$arch
+
+# Rackspace
 Server = https://iad.mirror.rackspace.com/archlinux/$repo/os/$arch
 Server = https://ord.mirror.rackspace.com/archlinux/$repo/os/$arch
-Server = https://mirror.rackspace.com/archlinux/$repo/os/$arch
 Server = https://dfw.mirror.rackspace.com/archlinux/$repo/os/$arch
+Server = https://mirror.rackspace.com/archlinux/$repo/os/$arch
+
+# Leaseweb
 Server = https://mirror.wdc1.us.leaseweb.net/archlinux/$repo/os/$arch
-Server = https://fastly.mirror.pkgbuild.com/$repo/os/$arch
 Server = https://mirror.sfo12.us.leaseweb.net/archlinux/$repo/os/$arch
+
+# PKGBUILD
+Server = https://fastly.mirror.pkgbuild.com/$repo/os/$arch
 Server = https://geo.mirror.pkgbuild.com/$repo/os/$arch
 ```
 
@@ -329,7 +342,7 @@ Em seguida, editamos o arquivo `hosts`.
 127.0.1.1 seu-hostname.localdomain seu-hostname
 
 # IPv6
-::1 localhost ip6-hostname ip6-loopback
+::1 localhost ip6-localhost ip6-loopback
 fa02::1 ip6-allnodes
 fa02::2 ip6-allrouters
 ```
@@ -339,7 +352,7 @@ fa02::2 ip6-allrouters
 Podemos configurar o `sudo` do sistema com uma mudança não destrutiva, criando o arquivo `00-wheel` em `/etc/sudoers.d/`. Isto permitirá que usuários do grupo `wheel` possam rodar comandos como superusuário.
 
 ```text
-# echo %wheel ALL=(ALL:ALL) ALL | EDITOR=tee visudo -f /etc/sudoers.d/00-wheel
+# echo "%wheel ALL=(ALL:ALL) ALL" | EDITOR=tee visudo -f /etc/sudoers.d/00-wheel
 ```
 
 #### Senha do root
@@ -355,7 +368,7 @@ Criaremos agora uma senha segura para o root. Esta senha deve ser longa, recomen
 O comando abaixo habilitará os serviços de vários componentes, para que iniciem juntamente com o computador ao ligar. Novamente, usarei expansão por chaves do Bash para evitar repetição de muitas palavras (como os timers do btrfs-scrub).
 
 ```text
-# systemctl enable {NetworkManager,sshd,systemd-{timesyncd,oomd,resolved}}.service {fstrim,btrfs-scrub@{-,home,pkg,portables,machines,log,\\x2esnapshots}}.timer
+# systemctl enable {NetworkManager,sshd,systemd-{timesyncd,oomd,resolved}}.service {fstrim,btrfs-scrub@{-,home,pkg,flatpak,machines,portables,log,\\x2esnapshots}}.timer
 ```
 
 #### Configurando o mkinitcpio
@@ -403,10 +416,16 @@ Em `02-rootflags.conf`, apontamos o root do sistema para o mapeamento do contêi
 # echo "rootflags=subvol=@" > /etc/cmdline.d/02-rootflags.conf
 ```
 
-E adicionamos alguns outros parâmetros comuns ao kernel. Estes, por exemplo, limitação a quantidade de texto no boot, além de permitir que vejamos o *splash screen* durante a inicialização.
+E adicionamos alguns outros parâmetros comuns ao kernel.
 
 ```text
 # echo "rw loglevel=3 quiet splash" > /etc/cmdline.d/03-parameters.conf
+```
+
+Por último, alguns parâmetros relacionados ao *splas screen*. O *splah screen* será uma tela com a logo do Arch Linux que será exibida durante a inicialização do sistema, evitando mostrar textos do systemd nesta etapa.
+
+```text
+# echo "quiet splash" > /etc/cmdline.d/04-splash.conf
 ```
 
 Abrimos o arquivo de configuração da criação do UKI em `/etc/mkinitcpio.d/linux.preset`. Neste arquivo, modificamos o parâmetros de criação do UKI.
