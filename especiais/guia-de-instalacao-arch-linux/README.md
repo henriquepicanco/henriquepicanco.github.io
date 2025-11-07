@@ -419,25 +419,25 @@ Depois, criaremos os quatro arquivos numerados que usaremos para o cmdline. De i
 Depois, o parâmetro `root` que indica onde reside os sistema de arquivos do root. Neste caso, aponta para o mapeamento do nosso contêiner LUKS.
 
 ```text
-# echo "root=/dev/mapper/cryptroot" > /etc/cmdline.d/01-root.conf
+# echo "root=/dev/mapper/cryptroot" > /etc/cmdline.d/10-root.conf
 ```
 
 Em `02-rootflags.conf`, apontamos o root do sistema para o mapeamento do contêiner LUKS.
 
 ```text
-# echo "rootflags=subvol=@" > /etc/cmdline.d/02-rootflags.conf
+# echo "rootflags=subvol=@" > /etc/cmdline.d/20-btrfs.conf
 ```
 
 E adicionamos alguns outros parâmetros comuns ao kernel.
 
 ```text
-# echo "rw loglevel=3 quiet splash" > /etc/cmdline.d/03-parameters.conf
+# echo "rw loglevel=3" > /etc/cmdline.d/30-parameters.conf
 ```
 
 Por último, alguns parâmetros relacionados ao *splas screen*. O *splah screen* será uma tela com a logo do Arch Linux que será exibida durante a inicialização do sistema, evitando mostrar textos do systemd nesta etapa.
 
 ```text
-# echo "quiet splash" > /etc/cmdline.d/04-splash.conf
+# echo "quiet splash" > /etc/cmdline.d/40-splash.conf
 ```
 
 Abrimos o arquivo de configuração da criação do UKI em `/etc/mkinitcpio.d/linux.preset`. Neste arquivo, modificamos o parâmetros de criação do UKI.
