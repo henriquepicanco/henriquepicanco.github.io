@@ -7,8 +7,10 @@ DISK="DISCO"
 LUKS_PASSWORD="SENHA"
 ROOT_PASSWORD="SENHA"
 
-HOSTNAME="archliux"
+HOSTNAME="archlinux"
 TIMEZONE="America/Sao_Paulo"
+
+LOCALE="pt_BR.UTF-8"
 
 CONSOLE_KEYMAP="us-acentos"
 CONSOLE_FONT="eurlatgr"
@@ -23,21 +25,25 @@ ROOT_PART=${DISK}2
 
 LUKS_MAPPER="cryptroot"
 
-echo "${LUKS_PASSWORD}" | cryptsetup --hash sha512 --use-random --sector-size 4096 luksFormat ${ROOT_PART}
-echo "${LUKS_PASSWORD}" | cryptsetup open ${ROOT_PART} ${LUKS_MAPPER}
+echo "${LUKS_PASSWORD}" | cryptsetup --batch-mode --hash sha512 --use-random --sector-size 4096 luksFormat ${ROOT_PART}
+echo "${LUKS_PASSWORD}" | cryptsetup --batch-mode open ${ROOT_PART} ${LUKS_MAPPER}
 
 LUKS_CONTAINER="/dev/mapper/${LUKS_MAPPER}"
 TARGET="/mnt"
 
+# Format partitions
+mkfs.fat -F 32 ${BOOT_PART}
+mkfs.btrfs ${LUKS_CONTAINER}
+
+# Mount $TARGET to create subvolumes
 mount ${LUKS_CONTAINER} $TARGET
-btrfs su cr ${TARGET}/@
-btrfs su cr ${TARGET}/@home
-btrfs su cr ${TARGET}/@pkg
-btrfs su cr ${TARGET}/@flatpak
-btrfs su cr ${TARGET}/@machines
-btrfs su cr ${TARGET}/@portables
-btrfs su cr ${TARGET}/@log
-btrfs su cr ${TARGET}/@.snapshots
+
+# Create the subvolumes
+for SUBVOL in @ @home @pkg @flatpak @machines @portables @log @.snapshots; do
+    btrfs su cr ${TARGET}/${SUBVOL}
+done
+
+# Umount $TARGET to mount the subvolumes itself
 umount ${TARGET}
 
 BTRFS_MOUNT_OPTIONS_COMPRESS="rw,relatime,compress=zstd:7,space_cache=v2"
@@ -117,7 +123,6 @@ PACKAGES=(
     linux-firmware
     intel-ucode
     btrfs-progs
-    dracut
     neovim
     sudo
     man-db
@@ -134,7 +139,7 @@ LUKS_CONTAINER_UUID=$(blkid -s UUID -o value ${LUKS_CONTAINER})
 
 # Create the custom FSTAB file
 cat > ${TARGET}/etc/fstab << EOF
-# FILESYSTEM  PATH  TYPE  OPTIONS  DUMP  PASS
+# FILESYSTEM PATH TYPE OPTIONS DUMP PASS
 UUID=${LUKS_CONTAINER_UUID} / btrfs ${BTRFS_MOUNT_OPTIONS_COMPRESS},subvol=@ 0 0
 UUID=${LUKS_CONTAINER_UUID} /home btrfs ${BTRFS_MOUNT_OPTIONS_COMPRESS},subvol=@home 0 0
 UUID=${LUKS_CONTAINER_UUID} /var/cache/pacman/pkg btrfs ${BTRFS_MOUNT_OPTIONS_NODATACOW},subvol=@pkg 0 0
@@ -166,7 +171,7 @@ arch-chroot ${TARGET} hwclock --systohc
 
 # Set the locale
 echo "${LOCALE} UTF-8" > ${TARGET}/etc/locale.gen
-echo "${LOCALE}" > ${TARGET}/etc/locale.conf
+echo "LANG=${LOCALE}" > ${TARGET}/etc/locale.conf
 
 # Generate the locales
 arch-chroot ${TARGET} locale-gen
@@ -196,7 +201,7 @@ EOF
 echo "%wheel ALL=(ALL:ALL) ALL" | EDITOR="tee" visudo -f ${TARGET}/etc/sudoers.d/00-wheel
 
 # Root password set
-echo ${ROOT_PASSWORD} | passwd --root ${TARGET} --stdin root
+echo ${ROOT_PASSWORD} | arch-chroot ${TARGET} passwd --stdin root
 
 # Systemd services
 SYSTEMD_SERVICES=(
@@ -226,19 +231,39 @@ systemctl enable --root=${TARGET} "${SYSTEMD_TIMERS[@]}"
 # Install the bootloader
 bootctl --esp-path=${TARGET}/efi install
 
-# Configure cmdline for Dracut
-cat > ${TARGET}/etc/dracut.conf.d/cmdline.conf << EOF
-kernel_cmdline="rd.luks.name=${ROOT_PART_UUID}=${LUKS_MAPPER} root=${LUKS_CONTAINER} rootflags=subvol=@ rw loglevel=3 quiet splash"
+# Create the cmdline.d folder
+mkdir -p ${TARGET}/etc/cmdline.d
+
+# Configure cmdline
+echo "rd.luks.name=${ROOT_PART_UUID}=${LUKS_MAPPER}" > ${TARGET}/etc/cmdline.d/00-luks.conf
+echo "root=${LUKS_CONTAINER}" > ${TARGET}/etc/cmdline.d/10-root.conf
+echo "rootflags=subvol=@" > ${TARGET}/etc/cmdline.d/20-btrfs.conf
+echo "rw loglevel=3" > ${TARGET}/etc/cmdline.d/30-parameters.conf
+
+# Remove old reminecences from old mkinitcpio configuration
+rm /boot/initramfs-linux.img
+
+# Configure mkinitcpio
+cat > ${TARGET}/etc/mkinitcpio.conf << EOF
+MODULES=()
+BINARIES=()
+FILES=()
+HOOKS=(systemd autodetect microcode modconf kms keyboard sd-vconsole sd-encrypt block filesystems)
 EOF
 
-# Configure dracut itself
-cat > ${TARGET}/etc/dracut.conf.d/dracut.conf << EOF
-hostonly="yes"
-uefi="yes"
-compress="zstd"
+# Configure linux kernel generation for mkinitcpio
+cat > ${TARGET}/etc/mkinitcpio.d/linux.preset << EOF
+ALL_kver="/boot/vmlinuz-linux"
+PRESETS=('default')
+default_uki="/efi/EFI/Linux/arch-linux.efi"
 EOF
 
-# Generate Dracut image
-arch-chroot ${TARGET} dracut
+# Generate initramfs image
+arch-chroot ${TARGET} mkinitcpio -P
+
+# Exiting
+umount -R /mnt
+cryptsetup close ${LUKS_MAPPER}
+#systemctl reboot
 
 echo "==== O SCRIPT TERMINOU SEM ERROS ==="
